@@ -6,7 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class Sokoban {
-    
+    //mover personaje
+    //reiniciar nivel
+    //contar movimientos por nivel
+    //permitir cambiar de nivel
+    //escalar niveles segun que ocupe mas.
+    //Maximo de alto 17#
+    //Maximo de ancho 30#
+    //Conseguir imprimir un nivel
+    //Implementar poder cambiar de nivel
     private JFrame frame;
     private int WIDTH = 600;
     private int LENGTH = 600;

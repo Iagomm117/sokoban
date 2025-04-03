@@ -25,11 +25,11 @@ public class Pantalla extends JPanel{
             personaje = ImageIO.read(new File("sprites/personaje.png"));
             objetivo = ImageIO.read(new File("sprites/suelopunto.png"));
             caja = ImageIO.read(new File("sprites/caja.png"));
-            
-        } catch (Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
+    
     @Override
     protected void paintComponent (Graphics g){
         super.paintComponents(g);
