@@ -3,7 +3,6 @@ package iago.sokoban;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -29,11 +28,10 @@ public class Sokoban {
         pantalla = new Pantalla(levelManager);
         pantalla.setBackground(Color.black);
         frame.add(pantalla);
-        
         frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
         leerTeclado();
-        pantalla.updateUI();
+        
         
           
     }
