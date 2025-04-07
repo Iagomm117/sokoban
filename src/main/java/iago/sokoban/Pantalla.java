@@ -12,6 +12,7 @@ public class Pantalla extends JPanel {
     private BufferedImage personaje;
     private BufferedImage objetivo;
     private BufferedImage caja;
+    private BufferedImage cajaObjetivo;
     
     private LevelManager levelManager;
     private int tileSize = 32;
@@ -25,6 +26,7 @@ public class Pantalla extends JPanel {
             personaje = ImageIO.read(new File("sprites/personaje.png"));
             objetivo = ImageIO.read(new File("sprites/suelopunto.png"));
             caja = ImageIO.read(new File("sprites/caja.png"));
+            cajaObjetivo = ImageIO.read(new File("sprites/caja2.png"));
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +66,7 @@ public class Pantalla extends JPanel {
                         g.drawImage(caja, posX, posY, tileSize, tileSize, this);
                         break;
                     case '*':
-                        g.drawImage(caja, posX, posY, tileSize, tileSize, this);
+                        g.drawImage(cajaObjetivo, posX, posY, tileSize, tileSize, this);
                         break;
                     case '+':
                         g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
@@ -73,4 +75,6 @@ public class Pantalla extends JPanel {
             }
         }
     }
+    
+    
 }

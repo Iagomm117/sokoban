@@ -1,7 +1,9 @@
 package iago.sokoban;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -9,11 +11,13 @@ public class Sokoban {
     private JFrame frame;
     private Pantalla pantalla;
     private LevelManager levelManager;
+    private Nivel nivel;
     private int WIDTH = 800;
     private int HEIGHT = 600;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Sokoban().iniciar());
+        
     }
 
     private void iniciar() {
@@ -22,13 +26,16 @@ public class Sokoban {
         
         frame = new JFrame("Sokoban");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         pantalla = new Pantalla(levelManager);
+        pantalla.setBackground(Color.black);
         frame.add(pantalla);
         
         frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
         leerTeclado();
+        pantalla.updateUI();
+        
+          
     }
     
     private void leerTeclado() {
@@ -45,7 +52,7 @@ public class Sokoban {
             public void keyReleased(KeyEvent e) {
             switch(e.getKeyCode()) {
                     case 39 :
-                        System.out.println("Derecha");
+                        System.out.println("Derecha");                    
                         break;
                     case 37:
                         System.out.println("Izquierda");
