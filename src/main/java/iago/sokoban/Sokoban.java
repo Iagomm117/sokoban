@@ -6,62 +6,57 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class Sokoban {
-    //mover personaje
-    //reiniciar nivel
-    //contar movimientos por nivel
-    //permitir cambiar de nivel
-    //escalar niveles segun que ocupe mas.
-    //Maximo de alto 17#
-    //Maximo de ancho 30#
-    //Conseguir imprimir un nivel
-    //Implementar poder cambiar de nivel
     private JFrame frame;
-    private int WIDTH = 600;
-    private int LENGTH = 600;
+    private Pantalla pantalla;
+    private LevelManager levelManager;
+    private int WIDTH = 800;
+    private int HEIGHT = 600;
 
     public static void main(String[] args) {
-        
-        SwingUtilities.invokeLater(() -> new Sokoban().iniciar()); 
-        LevelManager level = new LevelManager();
-        level.cargarNiveles();
-        
+        SwingUtilities.invokeLater(() -> new Sokoban().iniciar());
     }
 
     private void iniciar() {
+        levelManager = new LevelManager();
+        levelManager.cargarNiveles("levels/niveles.txt");
+        
         frame = new JFrame("Sokoban");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new Pantalla());
-        frame.setSize(WIDTH, LENGTH);
+        
+        pantalla = new Pantalla(levelManager);
+        frame.add(pantalla);
+        
+        frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
         leerTeclado();
-
     }
-    private void leerTeclado(){
+    
+    private void leerTeclado() {
         frame.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
+            public void keyTyped(KeyEvent e) {}
+            
             @Override
             public void keyPressed(KeyEvent e) {
-                switch(e.getKeyCode()){
-                    case 39 ->
-                      System.out.println("derecha");
-                    case 37 ->
-                      System.out.println("izquierda");
-                    case 38 ->
-                      System.out.println("arriba");
-                    case 40 ->
-                      System.out.println("derecha");
-                    }
-                }
-              
+                
+            }
             
-
             @Override
             public void keyReleased(KeyEvent e) {
-            }
+            switch(e.getKeyCode()) {
+                    case 39 :
+                        System.out.println("Derecha");
+                        break;
+                    case 37:
+                        System.out.println("Izquierda");
+                        break;
+                    case 38:
+                        System.out.println("Arriba");
+                        break;
+                    case 40:
+                        System.out.println("Abajo");
+                        break;
+                }}
         });
-                }
     }
-
+}

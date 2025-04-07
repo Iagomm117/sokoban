@@ -6,50 +6,71 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Pantalla extends JPanel{
-    
+public class Pantalla extends JPanel {
     private BufferedImage pared;
     private BufferedImage suelo;
     private BufferedImage personaje;
     private BufferedImage objetivo;
     private BufferedImage caja;
-    private BufferedImage cajaEnObjetivo;
-    private int MIN = 0;
-    private int MAX = 9;
     
-    public Pantalla(){
+    private LevelManager levelManager;
+    private int tileSize = 32;
+    
+    public Pantalla(LevelManager levelManager) {
+        this.levelManager = levelManager;
         
-        try{
+        try {
             pared = ImageIO.read(new File("sprites/ladrillo.png"));
             suelo = ImageIO.read(new File("sprites/suelo.png"));
             personaje = ImageIO.read(new File("sprites/personaje.png"));
             objetivo = ImageIO.read(new File("sprites/suelopunto.png"));
             caja = ImageIO.read(new File("sprites/caja.png"));
-        }catch (Exception e){
+            
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
     @Override
-    protected void paintComponent (Graphics g){
-        super.paintComponents(g);
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         
-        if(pared == null){return;}
+        if (pared == null) return;
         
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if(i == MIN || j == MIN  || i == MAX || j == MAX) {
-                    g.drawImage(pared, i*32, j*32,32,32,this); 
+        Nivel nivel = levelManager.getNivelActual();
+        if (nivel == null) return;
+        
+        for (int y = 0; y < nivel.getAlto(); y++) {
+            for (int x = 0; x < nivel.getAncho(); x++) {
+                char celda = nivel.getCelda(x, y);
+                int posX = x * tileSize;
+                int posY = y * tileSize;
+                
+
+                if (celda == '#' || celda == ' ' || celda == '$' || celda == '@') {
+                    g.drawImage(suelo, posX, posY, tileSize, tileSize, this);
+                } else if (celda == '.' || celda == '*' || celda == '+') {
+                    g.drawImage(objetivo, posX, posY, tileSize, tileSize, this);
                 }
-                else {
-                   g.drawImage(suelo, i*32, j*32,32,32,this); 
+                
+                switch (celda) {
+                    case '#':
+                        g.drawImage(pared, posX, posY, tileSize, tileSize, this);
+                        break;
+                    case '@':
+                        g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
+                        break;
+                    case '$':
+                        g.drawImage(caja, posX, posY, tileSize, tileSize, this);
+                        break;
+                    case '*':
+                        g.drawImage(caja, posX, posY, tileSize, tileSize, this);
+                        break;
+                    case '+':
+                        g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
+                        break;
                 }
-                g.drawImage(personaje,5*32,3*32,32,32,this);
-               
             }
-            
         }
     }
-   
 }
-
