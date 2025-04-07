@@ -17,14 +17,15 @@ public class Nivel {
     }
     
     public int getAncho() {
-        int max = 0;
-        for (String linea : mapa) {
-            if (linea.length() > max) {
-                max = linea.length();
-            }
+    int max = 0;
+    for (int i = 0; i < mapa.size(); i++) {
+        String linea = mapa.get(i);
+        if (linea.length() > max) {
+            max = linea.length();
         }
-        return max;
     }
+    return max;
+}
     
     public int getAlto() {
         return mapa.size();
@@ -39,5 +40,25 @@ public class Nivel {
     
     public ArrayList<String> getMapa() {
         return mapa;
+    }
+    public void setCelda(int x, int y, char c) {
+        if (y >= 0 && y < mapa.size() && x >= 0 && x < mapa.get(y).length()) {
+            StringBuilder sb = new StringBuilder(mapa.get(y));
+            sb.setCharAt(x, c);
+            mapa.set(y, sb.toString());
+        }
+    }
+    
+    public int[] getPosicionJugador() {
+        for (int y = 0; y < mapa.size(); y++) {
+            String fila = mapa.get(y);
+            for (int x = 0; x < fila.length(); x++) {
+                char c = fila.charAt(x);
+                if (c == '@' || c == '+') {
+                    return new int[]{x, y};
+                }
+            }
+        }
+        return null;
     }
 }
