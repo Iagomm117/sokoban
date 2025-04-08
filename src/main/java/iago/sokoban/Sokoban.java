@@ -10,7 +10,6 @@ public class Sokoban {
     private JFrame frame;
     private Pantalla pantalla;
     private LevelManager levelManager;
-    private Nivel nivel;
     private int WIDTH = 800;
     private int HEIGHT = 600;
 
@@ -55,31 +54,38 @@ public class Sokoban {
                 
             switch(e.getKeyCode()) {
                     case 39 :
-                        System.out.println("Derecha");
-                        moverJugador(nivel, x, y, x+1, y);
+                        //Derecha
+                        movimientoJugador(nivel, x, y, x+1, y);
                         break;
                     case 37:
-                        System.out.println("Izquierda");
-                        moverJugador(nivel, x, y, x-1, y);
+                        //Izquierda
+                        movimientoJugador(nivel, x, y, x-1, y);
                         break;
                     case 38:
-                        System.out.println("Arriba");
-                        moverJugador(nivel, x, y, x, y-1);
+                        //Arriba
+                        movimientoJugador(nivel, x, y, x, y-1);
                         break;
                     case 40:
-                        System.out.println("Abajo");
-                        moverJugador(nivel, x, y, x, y+1);
+                        //Abajo
+                        movimientoJugador(nivel, x, y, x, y+1);
                         break;
-                    case 82 : //R 
+                    case 82 : //R permite reinciar el juego.
                         frame.dispose();
-                        SwingUtilities.invokeLater(() -> new Sokoban().iniciar());
+                        iniciar();
                     break;
+                    case 32 : //espacio permite cambiar nivel
+                        levelManager.siguienteNivel();
+                        break;
+                    case 8 : //retroceso permite retroceder en el nivel
+                        levelManager.anteriorNivel();
+                        break;
+                        
                 }
                 pantalla.repaint();
             }
         });
     }
-    private void moverJugador(Nivel nivel, int xActual, int yActual, int xNuevo, int yNuevo) {
+    private void movimientoJugador(Nivel nivel, int xActual, int yActual, int xNuevo, int yNuevo) {
         char celdaActual = nivel.getCelda(xActual, yActual);
         char celdaNueva = nivel.getCelda(xNuevo, yNuevo);
         
@@ -101,16 +107,8 @@ public class Sokoban {
             }
             nivel.setCelda(xNuevo, yNuevo, nuevaCasilla);
             
-            } else if (celdaNueva == '$' || celdaNueva == '*') {
-            int xSiguiente = xNuevo + (xNuevo - xActual);
-            int ySiguiente = yNuevo + (yNuevo - yActual);
-            char celdaSiguiente = nivel.getCelda(xSiguiente, ySiguiente);
-            
-            if(celdaSiguiente == ' '){
-                celdaSiguiente = '$';
-            }
-            nivel.setCelda(xNuevo, yNuevo, celdaSiguiente);
-       
         }
+       
     }
 }
+

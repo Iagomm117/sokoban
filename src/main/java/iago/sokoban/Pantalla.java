@@ -48,13 +48,6 @@ public class Pantalla extends JPanel {
                 int posX = x * tileSize;
                 int posY = y * tileSize;
                 
-
-                if (celda == '#' || celda == ' ' || celda == '$' || celda == '@') {
-                    g.drawImage(suelo, posX, posY, tileSize, tileSize, this);
-                } else if (celda == '.' || celda == '*' || celda == '+') {
-                    g.drawImage(objetivo, posX, posY, tileSize, tileSize, this);
-                }
-                
                 switch (celda) {
                     case '#':
                         g.drawImage(pared, posX, posY, tileSize, tileSize, this);
@@ -70,6 +63,12 @@ public class Pantalla extends JPanel {
                         break;
                     case '+':
                         g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
+                        break;
+                    case ' ': 
+                         g.drawImage(suelo, posX, posY, tileSize, tileSize, this);
+                         break;
+                    case '.':
+                        g.drawImage(objetivo, posX, posY, tileSize, tileSize, this);
                         break;
                 }
             }
