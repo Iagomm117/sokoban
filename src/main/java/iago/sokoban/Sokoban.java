@@ -73,7 +73,6 @@ public class Sokoban {
                     case 82 : //R 
                         frame.dispose();
                         SwingUtilities.invokeLater(() -> new Sokoban().iniciar());
-                        
                     break;
                 }
                 pantalla.repaint();
@@ -113,7 +112,5 @@ public class Sokoban {
             nivel.setCelda(xNuevo, yNuevo, celdaSiguiente);
        
         }
-        }
-        
     }
-
+}
