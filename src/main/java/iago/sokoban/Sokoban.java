@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class Sokoban {
@@ -12,7 +13,14 @@ public class Sokoban {
     private LevelManager levelManager;
     private int WIDTH = 800;
     private int HEIGHT = 600;
-
+    private final char suelo = ' ';
+    private final char personaje = '@';
+    private final char personajeObjetivo = '+';
+    private final char objetivo = '.';
+    private final char caja= '$';
+    private final char cajaObjetivo = '*';
+    private int contador = 1;
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Sokoban().iniciar());
         
@@ -30,7 +38,7 @@ public class Sokoban {
         frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
         leerTeclado();
-
+        
     }
     
     private void leerTeclado() {
@@ -72,11 +80,13 @@ public class Sokoban {
                     case 82 : //R permite reinciar el juego.
                         frame.dispose();
                         iniciar();
-                    break;
+                        break;
                     case 32 : //espacio permite cambiar nivel
+                        contador++;
                         levelManager.siguienteNivel();
                         break;
                     case 8 : //retroceso permite retroceder en el nivel
+                        contador--;
                         levelManager.anteriorNivel();
                         break;
                         
@@ -90,25 +100,27 @@ public class Sokoban {
         char celdaNueva = nivel.getCelda(xNuevo, yNuevo);
         
         
-        if (celdaNueva == ' ' || celdaNueva == '.') {
+        
+        if (celdaNueva == suelo || celdaNueva == objetivo) {
             char casillaActual;
-            if (celdaActual == '+') {
-                casillaActual = '.';
+            if (celdaActual == personajeObjetivo) {
+                casillaActual = objetivo;
             } else {
-                casillaActual = ' ';
+                casillaActual = suelo;
             }
             nivel.setCelda(xActual, yActual, casillaActual);
     
             char nuevaCasilla;
-            if (celdaNueva == '.') {
-                nuevaCasilla = '+';
+            if (celdaNueva == objetivo) {
+                nuevaCasilla = personajeObjetivo;
             } else {
-                nuevaCasilla = '@';
+                nuevaCasilla = personaje;
             }
             nivel.setCelda(xNuevo, yNuevo, nuevaCasilla);
             
         }
        
     }
+    
 }
 
