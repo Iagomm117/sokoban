@@ -3,8 +3,6 @@ package iago.sokoban;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -61,34 +59,23 @@ public class Sokoban {
                 int y = posJugador[1];
                 
             switch(e.getKeyCode()) {
-                    case 39 :
-                        //Derecha
+                    case 39 -> //Derecha
                         movimientoJugador(nivel, x, y, x+1, y);
-                        break;
-                    case 37:
-                        //Izquierda
+                    case 37 -> //Izquierda
                         movimientoJugador(nivel, x, y, x-1, y);
-                        break;
-                    case 38:
-                        //Arriba
+                    case 38 -> //Arriba
                         movimientoJugador(nivel, x, y, x, y-1);
-                        break;
-                    case 40:
-                        //Abajo
+                    case 40 -> //Abajo
                         movimientoJugador(nivel, x, y, x, y+1);
-                        break;
-                    case 82 : //R permite reinciar el juego.
-                        
+                    case 82 -> //R permite reinciar el juego. 
+                    {
                         frame.dispose();
                         iniciar();
-                        break;
-                    case 32 : //espacio permite cambiar nivel
+                    }
+                    case 32 -> //espacio permite cambiar nivel
                         levelManager.siguienteNivel();
-                        break;
-                    case 8 : //retroceso permite retroceder en el nivel
+                    case 8 -> //retroceso permite retroceder en el nivel
                         levelManager.anteriorNivel();
-                        break;
-                        
                 }
                 pantalla.repaint();
             }
@@ -97,9 +84,6 @@ public class Sokoban {
     private void movimientoJugador(Nivel nivel, int xActual, int yActual, int xNuevo, int yNuevo) {
         char celdaActual = nivel.getCelda(xActual, yActual);
         char celdaNueva = nivel.getCelda(xNuevo, yNuevo);
-        
-        
-        
         if (celdaNueva == suelo || celdaNueva == objetivo) {
             char casillaActual;
             if (celdaActual == personajeObjetivo) {

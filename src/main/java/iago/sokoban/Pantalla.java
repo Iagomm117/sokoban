@@ -3,6 +3,7 @@ package iago.sokoban;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -28,9 +29,7 @@ public class Pantalla extends JPanel {
             caja = ImageIO.read(new File("sprites/caja.png"));
             cajaObjetivo = ImageIO.read(new File("sprites/caja2.png"));
             
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
     
     @Override
@@ -49,27 +48,13 @@ public class Pantalla extends JPanel {
                 int posY = y * tileSize;
                 
                 switch (celda) {
-                    case '#':
-                        g.drawImage(pared, posX, posY, tileSize, tileSize, this);
-                        break;
-                    case '@':
-                        g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
-                        break;
-                    case '$':
-                        g.drawImage(caja, posX, posY, tileSize, tileSize, this);
-                        break;
-                    case '*':
-                        g.drawImage(cajaObjetivo, posX, posY, tileSize, tileSize, this);
-                        break;
-                    case '+':
-                        g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
-                        break;
-                    case ' ': 
-                         g.drawImage(suelo, posX, posY, tileSize, tileSize, this);
-                         break;
-                    case '.':
-                        g.drawImage(objetivo, posX, posY, tileSize, tileSize, this);
-                        break;
+                    case '#' -> g.drawImage(pared, posX, posY, tileSize, tileSize, this);
+                    case '@' -> g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
+                    case '$' -> g.drawImage(caja, posX, posY, tileSize, tileSize, this);
+                    case '*' -> g.drawImage(cajaObjetivo, posX, posY, tileSize, tileSize, this);
+                    case '+' -> g.drawImage(personaje, posX, posY, tileSize, tileSize, this);
+                    case ' ' -> g.drawImage(suelo, posX, posY, tileSize, tileSize, this);
+                    case '.' -> g.drawImage(objetivo, posX, posY, tileSize, tileSize, this);
                 }
             }
         }

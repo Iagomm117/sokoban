@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class LevelManager {
-    private ArrayList<Nivel> niveles = new ArrayList<>();
+    private final ArrayList<Nivel> niveles;
     private int nivelActual = 0;
+
+    public LevelManager() {
+        this.niveles = new ArrayList<>();
+    }
     
     public void cargarNiveles(String nombreArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {

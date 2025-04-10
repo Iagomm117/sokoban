@@ -3,7 +3,7 @@ package iago.sokoban;
 import java.util.ArrayList;
 
 public class Nivel {
-    private ArrayList<String> mapa;
+    private final ArrayList<String> mapa;
     
     public Nivel(ArrayList<String> mapa) {
         this.mapa = mapa;
@@ -30,9 +30,7 @@ public class Nivel {
     public int getAlto() {
         return mapa.size();
     }
-    
-   
-    
+
     public ArrayList<String> getMapa() {
         return mapa;
     }
