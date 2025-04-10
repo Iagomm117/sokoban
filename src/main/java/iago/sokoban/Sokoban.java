@@ -3,8 +3,9 @@ package iago.sokoban;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class Sokoban {
@@ -19,7 +20,6 @@ public class Sokoban {
     private final char objetivo = '.';
     private final char caja= '$';
     private final char cajaObjetivo = '*';
-    private int contador = 1;
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Sokoban().iniciar());
@@ -55,7 +55,7 @@ public class Sokoban {
                 if (nivel == null) return;
                 
                 int[] posJugador = nivel.getPosicionJugador();
-                if (posJugador == null) return;
+                if (posJugador == null) {return;}
                 
                 int x = posJugador[0];
                 int y = posJugador[1];
@@ -78,15 +78,14 @@ public class Sokoban {
                         movimientoJugador(nivel, x, y, x, y+1);
                         break;
                     case 82 : //R permite reinciar el juego.
+                        
                         frame.dispose();
                         iniciar();
                         break;
                     case 32 : //espacio permite cambiar nivel
-                        contador++;
                         levelManager.siguienteNivel();
                         break;
                     case 8 : //retroceso permite retroceder en el nivel
-                        contador--;
                         levelManager.anteriorNivel();
                         break;
                         

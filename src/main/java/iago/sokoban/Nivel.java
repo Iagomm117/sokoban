@@ -31,12 +31,7 @@ public class Nivel {
         return mapa.size();
     }
     
-    public void getJugador(){
-        int x = 0;
-        if(mapa.get(x) == "$"){
-            System.out.println(mapa.get(x));
-        }
-    }
+   
     
     public ArrayList<String> getMapa() {
         return mapa;

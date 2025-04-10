@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class LevelManager {
     private ArrayList<Nivel> niveles = new ArrayList<>();
-    //Primer nivel = 0
-    //Ultimo nivel = 154
     private int nivelActual = 0;
     
     public void cargarNiveles(String nombreArchivo) {
