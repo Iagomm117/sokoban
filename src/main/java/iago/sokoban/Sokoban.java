@@ -45,10 +45,6 @@ public class Sokoban {
             public void keyTyped(KeyEvent e) {}
             @Override
             public void keyPressed(KeyEvent e) {
-            }
-            
-            @Override
-            public void keyReleased(KeyEvent e) {
                 Nivel nivel = levelManager.getNivelActual();
                 if (nivel == null) return;
                 
@@ -79,8 +75,13 @@ public class Sokoban {
                 }
                 pantalla.repaint();
             }
-        });
+                       
+            @Override
+            public void keyReleased(KeyEvent e) {}
+                
+    });
     }
+    
     private void movimientoJugador(Nivel nivel, int xActual, int yActual, int xNuevo, int yNuevo) {
         char celdaActual = nivel.getCelda(xActual, yActual);
         char celdaNueva = nivel.getCelda(xNuevo, yNuevo);
