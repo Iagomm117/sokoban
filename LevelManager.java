@@ -15,22 +15,22 @@ public class LevelManager {
     
     public void cargarNiveles(String nombreArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
-            ArrayList<String> nivelActual = new ArrayList<>();
+            ArrayList<String> nivelTemp = new ArrayList<>();
             
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (linea.trim().isEmpty()) {
-                    if (!nivelActual.isEmpty()) {
-                        niveles.add(new Nivel(new ArrayList<>(nivelActual)));
-                        nivelActual.clear();
+                    if (!nivelTemp.isEmpty()) {
+                        niveles.add(new Nivel(new ArrayList<>(nivelTemp)));
+                        nivelTemp.clear();
                     }
                 } else if (!linea.startsWith("Level ") && !linea.startsWith("'")) {
-                    nivelActual.add(linea);
+                    nivelTemp.add(linea);
                 }
             }
             
-            if (!nivelActual.isEmpty()) {
-                niveles.add(new Nivel(nivelActual));
+            if (!nivelTemp.isEmpty()) {
+                niveles.add(new Nivel(nivelTemp));
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
@@ -54,5 +54,12 @@ public class LevelManager {
         if (nivelActual > 0) {
             nivelActual--;
         }
+    }
+
+    public void reiniciarNivel() {
+        int nivelGuardado = nivelActual;
+        niveles.clear();
+        cargarNiveles("levels/niveles.txt");
+        nivelActual = nivelGuardado;
     }
 }
